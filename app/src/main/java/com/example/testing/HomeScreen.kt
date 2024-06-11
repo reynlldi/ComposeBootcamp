@@ -1,6 +1,7 @@
 package com.example.testing
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -45,11 +47,13 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 painter = painterResource(id = R.drawable.albert),
                 contentDescription = "foto albert einstein",
                 modifier = Modifier
+                    .border(2.dp, Color.Blue, CircleShape)
                     .size(60.dp)
                     .clip(CircleShape)
                     .clickable {
                         expanded = !expanded
-                    },
+                    }
+                    .alpha(0.5f),
                 contentScale = ContentScale.Crop
             )
             Icon(
