@@ -14,8 +14,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Badge
+import androidx.compose.material.BadgedBox
 import androidx.compose.material.Button
+import androidx.compose.material.Checkbox
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Slider
@@ -26,13 +31,16 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
@@ -122,7 +130,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                             actionLabel = "Undo",
                             duration = SnackbarDuration.Short
                         )
-                        when(result){
+                        when (result) {
                             SnackbarResult.ActionPerformed -> {}
                             SnackbarResult.Dismissed -> {}
                         }
@@ -133,7 +141,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             }
         },
         bottomBar = {
-            androidx.compose.material3.BottomAppBar(
+            BottomAppBar(
                 actions = {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(imageVector = Icons.Default.Edit, contentDescription = "icon edit")
@@ -167,12 +175,16 @@ fun HomeScreenContent(modifier: Modifier = Modifier) {
     // switch button
     var switch by remember { mutableStateOf(false) }
 
+    // Checkbox
+    var checked by remember { mutableStateOf(false) }
+
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,
@@ -308,6 +320,31 @@ fun HomeScreenContent(modifier: Modifier = Modifier) {
                 }
             }
         )
+
+        // Divider (garis)
+        Divider(
+            thickness = 2.dp
+        )
+
+        // Checkbox
+        Checkbox(
+            checked = checked,
+            onCheckedChange = {
+                checked = it
+            }
+        )
+
+        // badge
+        BadgedBox(
+            badge = {
+                Badge()
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Email,
+                contentDescription = "Email"
+            )
+        }
     }
 }
 
